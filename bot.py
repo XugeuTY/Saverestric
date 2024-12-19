@@ -47,4 +47,5 @@ async def main():
 
 if __name__ == '__main__':
     import asyncio
-    asyncio.run(main())
+    # Run the main async function
+    asyncio.run(main())  # This is the correct way to start it
