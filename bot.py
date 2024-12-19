@@ -1,3 +1,4 @@
+import os
 from telegram import InlineKeyboardButton, InlineKeyboardMarkup, Update
 from telegram.ext import Updater, CommandHandler, CallbackQueryHandler
 
@@ -8,7 +9,6 @@ def start(update: Update, context):
         [InlineKeyboardButton("Awadh Ojha App (Nothing Required)", callback_data='awadh')],
         [InlineKeyboardButton("Khan Sir (Nothing Required)", callback_data='khansir')],
         [InlineKeyboardButton("ICS Coaching (Any Random Login)", callback_data='ics')],
-        # Add more buttons as per your requirement
         [InlineKeyboardButton("🔙 Back", callback_data='back'), InlineKeyboardButton("❌ Close", callback_data='close')],
     ]
     reply_markup = InlineKeyboardMarkup(keyboard)
@@ -29,8 +29,13 @@ def button(update: Update, context):
 
 # Main function
 def main():
-    # Replace 'YOUR_BOT_TOKEN' with your BotFather token
-    updater = Updater("7324404875:AAHn09mQzeWtfMkn8WZd86S8J59VAj9_uaA", use_context=True)
+    # Get bot token from environment variable
+    bot_token = os.getenv("TELEGRAM_TOKEN")
+    if not bot_token:
+        print("Error: The 'TELEGRAM_TOKEN' environment variable is missing.")
+        return
+
+    updater = Updater(bot_token, use_context=True)
     dispatcher = updater.dispatcher
 
     dispatcher.add_handler(CommandHandler("start", start))
@@ -42,4 +47,3 @@ def main():
 
 if __name__ == '__main__':
     main()
-  
