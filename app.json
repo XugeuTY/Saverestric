@@ -1,0 +1,22 @@
+{
+  "name": "telegram-bot",
+  "description": "A Telegram bot with inline buttons.",
+  "repository": "https://github.com/XugeuTY/Saverestric",
+  "keywords": ["telegram", "bot", "python"],
+  "env": {
+    "TELEGRAM_TOKEN": {
+      "description": "Your Telegram bot token.",
+      "required": true
+    }
+  },
+  "buildpacks": [
+    {
+      "url": "heroku/python"
+    }
+  ],
+  "formation": {
+    "worker": {
+      "quantity": 1
+    }
+  }
+}
