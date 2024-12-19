@@ -29,7 +29,7 @@ async def button(update: Update, context: ContextTypes.DEFAULT_TYPE):
 # Main function
 async def main():
     import os
-    bot_token = os.environ.get("TELEGRAM_BOT_TOKEN")
+    bot_token = os.environ.get("7324404875:AAHP2emM_PcwSL7dZnJ0iZ_I1M6QSRjrLxs")
     if not bot_token:
         print("Error: TELEGRAM_BOT_TOKEN environment variable is not set.")
         return
