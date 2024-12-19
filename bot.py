@@ -30,7 +30,7 @@ def button(update: Update, context):
 # Main function
 def main():
     # Replace 'YOUR_BOT_TOKEN' with your BotFather token
-    updater = Updater("YOUR_BOT_TOKEN", use_context=True)
+    updater = Updater("7324404875:AAHn09mQzeWtfMkn8WZd86S8J59VAj9_uaA", use_context=True)
     dispatcher = updater.dispatcher
 
     dispatcher.add_handler(CommandHandler("start", start))
