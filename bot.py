@@ -1,9 +1,8 @@
-import os
 from telegram import InlineKeyboardButton, InlineKeyboardMarkup, Update
-from telegram.ext import Application, CommandHandler, CallbackQueryHandler, CallbackContext
+from telegram.ext import Application, CommandHandler, CallbackQueryHandler, ContextTypes
 
 # Start command
-async def start(update: Update, context: CallbackContext):
+async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
     keyboard = [
         [InlineKeyboardButton("Classplus (Org Code Required)", callback_data='classplus')],
         [InlineKeyboardButton("Awadh Ojha App (Nothing Required)", callback_data='awadh')],
@@ -12,10 +11,10 @@ async def start(update: Update, context: CallbackContext):
         [InlineKeyboardButton("🔙 Back", callback_data='back'), InlineKeyboardButton("❌ Close", callback_data='close')],
     ]
     reply_markup = InlineKeyboardMarkup(keyboard)
-    await update.message.reply_text('Choose an option:', reply_markup=reply_markup)
+    await update.message.reply_text("Choose an option:", reply_markup=reply_markup)
 
 # Handle button clicks
-async def button(update: Update, context: CallbackContext):
+async def button(update: Update, context: ContextTypes.DEFAULT_TYPE):
     query = update.callback_query
     await query.answer()
     data = query.data
@@ -29,23 +28,23 @@ async def button(update: Update, context: CallbackContext):
 
 # Main function
 async def main():
-    # Get bot token from environment variable
-    bot_token = os.getenv("TELEGRAM_TOKEN")
+    import os
+    bot_token = os.environ.get("TELEGRAM_BOT_TOKEN")
     if not bot_token:
-        print("Error: The 'TELEGRAM_TOKEN' environment variable is missing.")
+        print("Error: TELEGRAM_BOT_TOKEN environment variable is not set.")
         return
 
-    # Create Application
+    # Create the application
     application = Application.builder().token(bot_token).build()
 
     # Add handlers
     application.add_handler(CommandHandler("start", start))
     application.add_handler(CallbackQueryHandler(button))
 
-    # Start polling
+    # Start the bot
+    print("Bot is running...")
     await application.run_polling()
 
 if __name__ == '__main__':
     import asyncio
-    # Run the main async function
-    asyncio.run(main())  # This is the correct way to start it
+    asyncio.run(main())
